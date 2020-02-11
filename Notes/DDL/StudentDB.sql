@@ -66,4 +66,10 @@ GO
 
 USE AdventureWorks2017;
 GO
+SELECT OrderQty FROM Production.WorkOrder
+WHERE StockedQty > 0;
+GO
+CREATE INDEX IX__Production__WorkOrder ON
+Production.WorkOrder (StockedQty) INCLUDE (OrderQty);
+GO
 
