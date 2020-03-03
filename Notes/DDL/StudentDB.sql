@@ -51,17 +51,45 @@ ALTER TABLE Class
 GO
 
 INSERT INTO Student (StudentID, FirstName, LastName, Email, Child, Age, Photo)
-VALUES (1, 'Jack', 'Sprat', 'jack.sprat@company.com', 1, 18, NULL);
+VALUES (2, 'Jack', 'Sprat', 'jack.sprat@company.com', 1, 18, NULL);
 
 INSERT INTO Course (Code, Name) VALUES ('PROG1400', 'Intro to OOP');
 
 INSERT INTO Class (StudentID, CourseID) VALUES (1, 1);
+SET IDENTITY_INSERT Class ON;
+INSERT INTO Class (ClassID, StudentID, CourseID)
+VALUES (110, 2, 1);
+SET IDENTITY_INSERT Class OFF;
 
+INSERT INTO Course (Code, Name)
+VALUES ('DBAS4002', 'Transactional SQL Programming');
+PRINT '@@IDENTITY = ' + STR(@@IDENTITY);
+PRINT 'SCOPE_IDENTITY() = ' + STR(SCOPE_IDENTITY());
+DECLARE @CourseID INT;
+SET @CourseID = SCOPE_IDENTITY(); -- @@IDENTITY;
+DECLARE @CourseID2 INT;
+SELECT @CourseID2 = CourseID FROM Course WHERE Code = 'DBAS4002';
+PRINT '@CourseID2 = ' + STR(@CourseID2);
+INSERT INTO Class (StudentID, CourseID)
+VALUES (2, @CourseID2);
 GO
 
-UPDATE Student
-SET StudentID = 2
-WHERE StudentID = 1;
+DELETE FROM Class
+WHERE ClassID = SCOPE_IDENTITY();
+GO
+-- only works if ON DELETE CASCADE is enabled
+DELETE FROM Student
+WHERE StudentID = 2;
+GO
+
+UPDATE Course
+SET Name = 'New Course Name'
+WHERE Code = 'DBAS4002';
+GO
+
+-- UPDATE Student
+-- SET StudentID = 2
+-- WHERE StudentID = 1;
 GO
 
 USE AdventureWorks2017;
@@ -69,7 +97,7 @@ GO
 SELECT OrderQty FROM Production.WorkOrder
 WHERE StockedQty > 0;
 GO
-CREATE INDEX IX__Production__WorkOrder ON
-Production.WorkOrder (StockedQty) INCLUDE (OrderQty);
+-- CREATE INDEX IX__Production__WorkOrder ON
+-- Production.WorkOrder (StockedQty) INCLUDE (OrderQty);
 GO
 

@@ -22,14 +22,16 @@ SELECT * FROM Customer;
 # Data Dictionary Example
 
 ### Student
+***NEW TABLE ADDED***  
 
-|Key|Name       |Type    |Size|Default   |Description                |Sample Data    |
-|---|-----------|--------|----|----------|---------------------------|---------------|
-|PK |StudentID  |INT     |11  |IDENTITY  |Unique sequential integer. |123456         |
-|-  |FirstName  |NVARCHAR|32  |-         |Student's first name.      |Jane           |
-|-  |LastName   |NVARCHAR|32  |-         |Student's last name.       |Smith          |
-|-  |Age        |SMALLINT|3   |-         |Student's age. (0-150)     |32             |
-|-  |Photo      |IMAGE   |-   |NULL      |Student ID photo.          |_image.jpg_    |
+>|Key|Name       |Type    |Size|Default   |Description                |Sample Data    |
+>|---|-----------|--------|----|----------|---------------------------|---------------|
+>|PK |StudentID  |INT     |11  |IDENTITY  |Unique sequential integer. |123456         |
+>|-  |FirstName  |NVARCHAR|32  |-         |Student's first name.      |Jane           |
+>|-  |LastName   |NVARCHAR|32  |-         |Student's last name.       |Smith          |
+>|-  |Age        |SMALLINT|3   |-         |Student's age. (0-150)     |32             |
+>|-  |Photo      |IMAGE   |-   |NULL      |Student ID photo.          |_image.jpg_    |
+>|-  |Address    |NVARCHAR|32  |-         |Student's address.         |5685 Leeds St. |
 
 ### Class
 
@@ -39,3 +41,6 @@ SELECT * FROM Customer;
 |-  |Code       |NCHAR   |8   |-         |Course code. (AAAA1234)    |DBAS4002       |
 |-  |Name       |NVARCHAR|32  |-         |Course name.               |Database       |
 |FK |StudentID  |INT     |11  |-         |Student ID (from Student)  |123456         |  
+
+
+All **bolded** fields are new fields that have been added.
